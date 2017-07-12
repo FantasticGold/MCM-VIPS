@@ -10,7 +10,7 @@ int main(void) {
 
   records.open("../NewData/users_buy_data.txt");
   users.open("../../Data/user_action_test_items.txt");
-  predict.open("../Prediction/prediction.txt");
+  predict.open("../Prediction/p1.txt");
   int u_id, spu_id;
   double nums[100000] = {0};
   int n = 10000000;
