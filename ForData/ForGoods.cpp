@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-using std::cout;
 using std::endl;
 using std::string;
 #include <map>
@@ -19,13 +18,6 @@ int main(void) {
     m[spu_id] = std::make_pair(brand_id, cat_id);
   }
   ifstm.close();
-
-  // // Sort
-  // ofstm.open("../NewData/goods_sort_data.txt");
-  // for (auto iter: m) {
-  //   ofstm << iter.first << " " << iter.second.first << " " << iter.second.second << endl;
-  // }
-  // ofstm.close();
 
   // // Count
   // ofstm.open("../NewData/goods_brand_data.txt");
