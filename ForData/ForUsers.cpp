@@ -36,7 +36,6 @@ int main(void) {
   ifstm.close();
 
   ofstm.open("../../NewData/user_click_data.txt");
-  ofstm << "The first is the user and the second is the number of goods that user clicked.\n";
   for (auto iter: click) {
     ofstm << iter.first << ' ' << iter.second << endl;
   } 
@@ -44,7 +43,6 @@ int main(void) {
 
   
   ofstm.open("../../NewData/user_buy_data.txt");
-  ofstm << "The first is the user and the second is the number of goods that user bought.\n";
   for (auto iter: buy) {
     ofstm << iter.first << ' ' << iter.second << endl;
   } 
