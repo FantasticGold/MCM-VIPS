@@ -2,7 +2,9 @@
 
 int main(void) {
 
-  countGoods();
+  // countGoods();
+  // initializeGoods();
+  predictGoods();
 
   return 0;
 }
