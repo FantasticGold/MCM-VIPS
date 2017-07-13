@@ -1,3 +1,10 @@
+/*
+  Input:
+    user_action_train.txt  (The data of users's actions)
+  Output:
+    users_click_data.txt  (The number of goods that users clicked)
+    users_buy_data.txt  (The number of goods that users bought)
+*/
 #include <iostream>
 #include <fstream>
 using std::endl;
@@ -13,30 +20,33 @@ int main(void) {
   std::map<int, int> click, buy;
   int u_id, spu_id, action_type;
   string date;
-  int n = 100;
+  int n = 10;
   while (ifstm) {
     if (--n) {
-      ifstm >> u_id >> spu_id >> action_type >> date;
-      ++click[u_id];
-      if (action_type == 1) {
-        ++buy[u_id];
-      }
-      n = 100000000;
+      ifstm.ignore(1024, '\n');
+      continue;
     }
-    ifstm.ignore(1024, '\n');
+    ifstm >> u_id >> spu_id >> action_type;
+    ++click[u_id];
+    if (action_type == 1) {
+      ++buy[u_id];
+    }
+    n = 10;
   }
   ifstm.close();
 
-  ofstm.open("../NewData/users_click_data.txt");
+  ofstm.open("../../NewData/user_click_data.txt");
+  ofstm << "The first is the user and the second is the number of goods that user clicked.\n";
   for (auto iter: click) {
-    ofstm << "User: " << iter.first << "   Click: " << iter.second << endl;
+    ofstm << iter.first << ' ' << iter.second << endl;
   } 
   ofstm.close();
 
   
-  ofstm.open("../NewData/users_buy_data.txt");
+  ofstm.open("../../NewData/user_buy_data.txt");
+  ofstm << "The first is the user and the second is the number of goods that user bought.\n";
   for (auto iter: buy) {
-    ofstm << "User: " << iter.first << "   Buy: " << iter.second << endl;
+    ofstm << iter.first << ' ' << iter.second << endl;
   } 
   ofstm.close();
 
