@@ -1,0 +1,27 @@
+There are two program (.exe) to preprocess the data.
+
+Model:
+  w: the number of goods
+  wi: each good
+  yi: each number of good of the same category
+  x1: the number of goods of the same brand
+  y1: the number of goods of the same category
+  x2: the number of goods of the same brand that the user bought
+  y2: the number of goods of the same category that the user bought
+  P(u) = (∑wi * yi)/w * ((1 + x2/x1)^x2) * ((y2/y1)^y2)
+Input:
+  path: ../../../Data
+  goods_train.txt
+  user_action_test_items.txt
+Output:
+  path: ../../../NewData/build2
+  user.txt  // each user
+  good.txt  // each good
+  brand.txt  // each brand of good
+  category.txt  // each category of good
+  brand_number.txt  // each number of good of the same brand
+  category_number.txt  // each number of good of the same category
+  user_brand_number.txt  // each number of good of the same brand that the user bought
+  user_category_number.txt  // each number of good of the same brand that the user bought
+  good_number.txt  // the number of good
+  pu.txt  // calculate the P(u)
