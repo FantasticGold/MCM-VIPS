@@ -2,8 +2,8 @@
 
 int main(void) {
 
-  // countGoods();
-  // initializeGoods();
+  countGoods();
+  initializeGoods();
   predictGoods();
 
   return 0;
