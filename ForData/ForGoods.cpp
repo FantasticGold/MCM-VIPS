@@ -19,22 +19,22 @@ int main(void) {
   }
   ifstm.close();
 
-  // // Count
-  // ofstm.open("../NewData/goods_brand_data.txt");
-  // std::map<string, int> m2, m3;
-  // for (auto iter: m) {
-  //   ++m2[iter.second.first];
-  //   ++m3[iter.second.second];
-  // }
-  // for (auto iter: m2) {
-  //   ofstm << "Brand: " << iter.first << "   Goods: " << iter.second << endl;
-  // }
-  // ofstm.close();
-  // ofstm.open("../NewData/goods_category_data.txt");
-  // for (auto iter: m3) {
-  //   ofstm << "Category: " << iter.first << "   Goods: " << iter.second << endl;
-  // }
-  // ofstm.close();
+  // Count
+  ofstm.open("../../NewData/goods_brand_data.txt");
+  std::map<string, int> m2, m3;
+  for (auto iter: m) {
+    ++m2[iter.second.first];
+    ++m3[iter.second.second];
+  }
+  for (auto iter: m2) {
+    ofstm << "Brand: " << iter.first << "   Goods: " << iter.second << endl;
+  }
+  ofstm.close();
+  ofstm.open("../../NewData/goods_category_data.txt");
+  for (auto iter: m3) {
+    ofstm << "Category: " << iter.first << "   Goods: " << iter.second << endl;
+  }
+  ofstm.close();
   
   return 0;
 }
