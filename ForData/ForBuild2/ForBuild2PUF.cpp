@@ -1,119 +1,82 @@
 #include <iostream>
 #include <fstream>
+#include <cstdio>
 #include <map>
 
-void countGoods();
-void initializeGoods();
-void predictGoods();
+void preprocess();
+void judge();
 
-void countGoods() {
+void preprocess() {
   std::ifstream data;
-  std::ofstream new_data;
-
-  data.open("../../../Data/goods_train.txt");
-  std::map<int, int> num_brand;
-  std::map<int, int> num_category;
-  int brand, category;
-  int sum = 0;
-  while (data) {
-    data.ignore(1024, '\t');
-    data >> brand >> category;
-    ++num_brand[brand];
-    ++num_category[category];
-    ++sum;
-  }
-  data.close();
-
-  new_data.open("../../../NewData/build2/build2_brand_number");
-  for (auto iter: num_brand) {
-    new_data << iter.first << ' ' << iter.second << std::endl;
-  }
-  new_data.close();
-  
-  new_data.open("../../../NewData/build2/build2_category_number");
-  for (auto iter: num_category) {
-    new_data << iter.first << ' ' << iter.second << std::endl;
-  }
-  new_data.close();
-  
-  new_data.open("../../../NewData/build2/build2_goods_number");
-  new_data << sum << std::endl;
-  new_data.close();
-
-  return;
-}
-
-void initializeGoods() {
-  std::ifstream data;
-  std::ifstream brand_data;
-  std::ifstream category_data;
+  std::ofstream user_data;
   std::ofstream good_data;
 
-  brand_data.open("../../../NewData/build2/build2_brand_number");
-  category_data.open("../../../NewData/build2/build2_category_number");
-  std::map<int, int> num_brand;
-  std::map<int, int> num_category;
-  int brand, category, num;
-  while (brand_data) {
-    brand_data >> brand >> num;
-    num_brand[brand] = num;
-  }
-  while (category_data) {
-    category_data >> category >> num;
-    num_category[category] = num;
-  }
-  brand_data.close();
-  category_data.close();
-  
-  data.open("../../../Data/goods_train.txt");
-  good_data.open("../../../NewData/build2/build2_good");
-  std::map<int, int> good_brand;
-  std::map<int, int> good_category;
-  int n, b, c;
-  while (data) {
-    data >> n >> b >> c;
-    good_data << n << ' ' << num_brand[b] << ' ' << num_category[c] << std::endl;
-  }
-  data.close();
-  good_data.close();
-
-  return;
-}
-
-void predictGoods() {
-  std::ifstream good_data;
-  std::ifstream data;
-  std::ofstream predict_data;
-  
-  std::map<int, int> brand, category;
-  good_data.open("../../../NewData/build2/build2_good");
-  int n, b, c;
-  while (good_data) {
-    good_data >> n >> b >> c;
-    brand[n] = b;
-    category[n] = c;
-  }
-  good_data.close();
+  data.open("../../../Data/user_action_test_items.txt");
+  user_data.open("../../../NewData/build2/user.txt");
+  good_data.open("../../../NewData/build2/good.txt");
 
   int user, good;
-  data.open("../../../Data/user_action_test_items.txt");
-  predict_data.open("../../../NewData/build2/build2_user_brand");
-  while (data) {
+  while (1) {
     data >> user >> good;
-    predict_data << user << ' ' << brand[good] << std::endl;
+    if (!data) {
+      break;
+    }
+    user_data << user << std::endl;
+    good_data << good << std::endl;
   }
-  predict_data.close();
-  data.close();
 
-  data.open("../../../Data/user_action_test_items.txt");
-  predict_data.open("../../../NewData/build2/build2_user_category");
-  while (data) {
-    data >> user >> good;
-    predict_data << user << ' ' << category[good] << std::endl;
-  }
-  predict_data.close();
   data.close();
+  user_data.close();
+  good_data.close();
 
   return;
 }
+void judge() {
+  std::ifstream data;
+  std::ofstream brand_data;
+  std::ofstream category_data;
 
+  data.open("../../../Data/goods_train.txt");
+  std::map<int, int> m_brand;
+  std::map<int, int> m_category;
+  int good, brand, category;
+  while (data) {
+    data >> good >> brand >> category;
+    m_brand[good] = brand;
+    m_category[good] = category;
+  }
+  data.close();
+
+  data.open("../../../NewData/build2/good.txt");
+  data.seekg(0, std::ios::end);
+  int len = data.tellg();
+  data.close();
+
+  brand_data.open("../../../NewData/build2/brand.txt");
+  category_data.open("../../../NewData/build2/category.txt");
+
+  char* str = new char[len + 1];
+  FILE* fp = fopen("../../../NewData/build2/good.txt", "r");
+  fread(str, 1, len, fp);
+  int num = 0;
+  int sum = 0;
+  for (int i = 0; i < len; ++i) {
+    if (str[i] == '\n') {
+      ++sum;
+      if (sum == 5761093) {
+        break;
+      }
+      brand_data << m_brand[num] << std::endl;
+      category_data << m_category[num] << std::endl;
+      num = 0;
+    } else {
+      num = 10 * num + str[i] - '0';
+    }
+  }
+  fclose(fp);
+  
+  brand_data.close();
+  category_data.close();
+
+  return;
+}
