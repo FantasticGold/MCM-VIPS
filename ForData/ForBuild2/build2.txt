@@ -15,9 +15,11 @@ Program:
 Input:  <path> ../../../Data
   goods_train.txt
   user_action_test_items.txt
+  user_action_train.txt
 
 Output:  <path> ../../../NewData/build2
   [ForBuild2PU.exe]
+  user_action // each buy action
   user.txt  // each user
   good.txt  // each good
   brand.txt  // each brand of good

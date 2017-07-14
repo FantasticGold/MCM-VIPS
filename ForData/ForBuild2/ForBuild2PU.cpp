@@ -2,14 +2,23 @@
 #include <cstdio>
 
 int main(void) {
-  // std::cerr << "Waiting: preprocess\n";
-  // preprocess();
+  std::cerr << "Waiting: simplify\n";
+  simplify();
+
+  std::cerr << "Waiting: preprocess\n";
+  preprocess();
   
-  // std::cerr << "Waiting: judge\n";
-  // judge();
+  std::cerr << "Waiting: judge\n";
+  judge();
   
   std::cerr << "Waiting: count\n";
   count();
+
+  std::cerr << "Waiting: weight\n";
+  weight();
+  
+  std::cerr << "Waiting: PU\n";
+  PU();
 
   char ch;
   do {
