@@ -2,11 +2,14 @@
 #include <cstdio>
 
 int main(void) {
-  // std::cout << "Waiting: preprocess\n";
+  // std::cerr << "Waiting: preprocess\n";
   // preprocess();
   
-  std::cout << "Waiting: judge\n";
-  judge();
+  // std::cerr << "Waiting: judge\n";
+  // judge();
+  
+  std::cerr << "Waiting: count\n";
+  count();
 
   char ch;
   do {

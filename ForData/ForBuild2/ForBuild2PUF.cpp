@@ -5,6 +5,7 @@
 
 void preprocess();
 void judge();
+void count();
 
 void preprocess() {
   std::ifstream data;
@@ -77,6 +78,47 @@ void judge() {
   
   brand_data.close();
   category_data.close();
+
+  return;
+}
+void count() {
+  std::ifstream data;
+  std::ofstream brand_number;
+  std::ofstream category_number;
+  std::ofstream good_number;
+
+  data.open("../../../Data/goods_train.txt");
+  std::map<int, int> m_brand;
+  std::map<int, int> m_category;
+  int good, brand, category;
+  int sum = 0;
+  while (1) {
+    data >> good >> brand >> category;
+    if (!data) {
+      break;
+    }
+    ++m_brand[brand];
+    ++m_category[category];
+    ++sum;
+  } 
+  data.close();
+
+  good_number.open("../../../NewData/build2/good_number.txt");
+  good_number << sum << std::endl;
+  good_number.close();
+
+  brand_number.open("../../../NewData/build2/brand_number.txt");
+  category_number.open("../../../NewData/build2/category_number.txt");
+
+  for (auto i: m_brand) {
+    brand_number << i.first << ' ' << i.second << std::endl;
+  }
+  for (auto i: m_category) {
+    category_number << i.first << ' ' << i.second << std::endl;
+  }
+
+  brand_number.close();
+  category_number.close();
 
   return;
 }
