@@ -1,0 +1,47 @@
+//整理时程序有多处修改，可能不能运行，有问题联系
+
+Model: consider the possibility that user U will buy good G(brand B, category C)
+	b1: if the user ever bought goods of brand b
+	b2: if the user ever clicked goods of brand b
+	c1: if the user ever bought goods of category c
+	c2: if the user ever clicked goods of category c
+	n1: the total goods that user u bought
+	n2: the total goods that user u clicked
+	n11/ n21: the number of goods(brand b) that u bought/ clicked
+	n12/ n22: the number of goods(category c) that u bought/ clicked
+	Pu(b): the relativity of user u and brand b
+	Pu(c): the relativity of user u and category c
+	P(g): the popularity of brand in category c
+	
+	Pu（b）=b1*（50%+（n11/n1）*50%）*50% + b2*（50%+（n21/n2）*50%）*50%
+	Pu（c）=c1*（50%+（n12/n1）*50%）*50% + c2*（50%+（n22/n2）*50%）*50%P（g）=m/m0
+	P（g）=m/m0
+	Pu（g） = Pu（b） * Pu（c）+ P（g）
+
+Program:
+	1.goodsTrainResort.cpp  // resort the file(“good_train.txt”) by id of good
+	2.count.cpp             // calculate the behavior of every user/good 
+	3.categoryCount.cpp     // calculate the sales of each category
+	4.brandCount.cpp        // calculate the sales of each brand
+	5.user_category.cpp     // add up the number of goods(different categories) 
+                                        that users bought and the sales of goods(different 
+	                                categories) of brands
+	6.user_brand.cpp        // add up the number of goods(different brands)
+	                                that users bought
+	7.userClick.cpp         // add up the number of goods(different categories/brands
+	                                that users clicked
+	8.build3
+
+File Introduction:
+	0.the number before the file name represent where the file came from
+	1.goods_train_sorted.txt  // idOfGood brand category
+	2.user_action_sorted.txt  // idOfUser totalBehavior bought click
+	2.goods_statistic.txt     // idOfGood totalBehavior bought click
+	3.categories_count.txt    // category sales
+	4.brands_count.txt        // brand sales
+	5.user_category.txt       // line1: idOfUser, line2: category and number(bought)
+	5.brand_category.txt      // line1: brand, line2: category and its sales
+	6.user_brand.txt          // line1: idOfUser, line2: brand and number(bought)
+	7.user_category_click.txt // line1: idOfUser, line2: category and number(clicked)
+	7.user_brand_click.txt    // line1: idOfUser, line2: brand and number(clicked)
+	8.result

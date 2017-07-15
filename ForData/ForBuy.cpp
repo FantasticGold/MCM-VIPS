@@ -24,7 +24,7 @@ int main(void) {
   // Count
   std::ifstream buys;
   std::ifstream users;
-  int buy;
+  //int buy;
   char c;
   int u_id, spu_id;
   buys.open("../../NewData/buy_data.txt");
