@@ -1,4 +1,6 @@
 Model:
+
+  [P(u)]
   w: the number of goods
   wi: each good
   yi: each number of good with the same category
@@ -7,27 +9,46 @@ Model:
   x2: the number of goods with the same brand that the user bought
   y2: the number of goods with the same category that the user bought
   P(u) = (∑wi * yi)/w * ((1 + x2/x1)^x2) * ((y2/y1)^y2)
+  
+  [P(g)]
+  v: the number of users
+  vi: each user
+  zi: each number of good that the user bought
+  v3: the number of users that bought the same brand
+  v4: the number of users that bought the same category
+  P(g) = (∑vi * zi)/w * ((1 + x*v3/v)^v3) * ((1 + y*v4/v)^v4)
 
 Program:
   ForBuild2PU.exe
   ForBuild2PG.exe
 
-Input:  <path> ../../../Data
+Input:
+  <path> ../../../Data
+
   goods_train.txt
   user_action_test_items.txt
   user_action_train.txt
 
-Output:  <path> ../../../NewData/build2
+Output:  
+  <path> ../../../NewData/build2
+
   [ForBuild2PU.exe]
   user_action // each buy action
   user.txt  // each user
   good.txt  // each good
-  brand.txt  // each brand of good
-  category.txt  // each category of good
+  brand.txt  // x
+  category.txt  // y
   brand_number.txt  // x1
   category_number.txt  // y1
   user_brand_number.txt  // x2
   user_category_number.txt  // y2
   good_number.txt  // w
-  user_weight  // ∑wi * yi
+  user_weight.txt  // ∑wi * yi
   pu.txt  // calculate the P(u)
+
+  [ForBuild2PG.exe]
+  user_number.txt  // v
+  brand_user_number.txt  // v3
+  category_user_number.txt  // v4
+  good_weight.txt  // ∑vi * zi
+  pg.txt  // calculate the P(g)
