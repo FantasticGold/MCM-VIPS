@@ -17,6 +17,7 @@ int main(void) {
     }
     data << std::endl;
   }
+  data.close();
 
   return 0;
 }

@@ -1,0 +1,83 @@
+Model:
+  [w_brand]
+  n_brand: the number of goods of the same brand
+  n1: the number of digits of <n_brand>
+  n2: the highest dight of <n_brand>
+  -> w_brand = (n2 + 9*n1) * 2
+
+  [w_category]
+  n_category: the number of goods of the same category
+  n1: the number of digits of <n_category>
+  n2: the highest dight of <n_category>
+  -> w_category = n2 + 9*n1
+
+  [i_user]
+  n_good: the number of goods that the user bought
+  m_good: the number of goods that the user clicked
+  k_brand: the number of brands that the user bought
+  k_category: the number of categories that the user bought
+  m1: the number of digits of <m_good>
+  m2: the highest dight of <m_good>
+  -> i_user = n_good + m2 + 9*m1 + n_good/k_brand + k_category;
+
+  [i_good]
+  n_user: the number of users that the good bought
+  m_user: the number of users that the good clicked
+  w_brand: the weight of brand of the good
+  w_category: the weight of category of the good
+  m1: the number of digits of <m_user>
+  m2: the highest dight of <m_user>
+  -> i_good = n_user + m2 + 9*m1 + w_brand + w_category
+
+  [w_user]
+  n_good: the number of goods that the user bought
+  wi: each <i_good> of goods that the user bought(it is not accurate)
+  ->w_user = i_user * (Σwi / n_good)
+  (->w_user = i_user)
+
+  [w_good]
+  n_user: the number of users that the good bought
+  wi: each <i_user> of users that the good bought(it is not accurate)
+  ->w_good = i_good * (Σwi / n_user)
+  (->w_good = i_good)
+
+  [weight]
+  w_user: the weight of user
+  w_good: the weight of good
+  ->weight = w_user * w_good
+
+Program:
+  basic.exe
+  weight.exe
+  sort.exe
+
+Input:
+  <path> ../../../Data
+
+  goods_train.txt
+  user_action_train.txt
+  user_action_test_items.txt
+
+Output:
+  <path> ../../../NewData/build4
+
+  [basic.exe]
+  brand_number.txt  // the number of goods of the same brand
+  category_number.txt  // the number of goods of the same category
+  user_bought.txt  // n_good
+  user_clicked.txt  // m_good
+  good_bought.txt  // n_user
+  good_clicked.txt  // m_user
+  user_bought_brand.txt  // k_brand
+  user_bought_category.txt  // k_category
+
+  [weight.exe]
+  brand_weight.txt  // w_brand
+  category_weight.txt  // w_category
+  user_basic_weight.txt  // i_user
+  good_basic_weight.txt  // i_good
+  user_weight.txt  // w_user
+  good_weight.txt  // w_good
+
+  [sort.exe]
+  weight.txt  // weight

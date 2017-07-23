@@ -102,6 +102,7 @@ void judge() {
     }
   }
   fclose(fp);
+  delete str;
   
   brand_data.close();
   category_data.close();
